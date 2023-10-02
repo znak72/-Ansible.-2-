@@ -224,7 +224,7 @@ And HOSTNAME is {{ ansible_hostname }}
 
 ### *Ответ*
 
-Плейбук [Ссылка](./homework-7.2/ansible-apache.yml)
+Плейбук [Ссылка](https://github.com/znak72/-Ansible.-2-/blob/main/ansible%20playbook)
 
 Архив роли [Ссылка](./homework-7.2/roles.tar.gz)
 
