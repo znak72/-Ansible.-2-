@@ -1,0 +1,7 @@
+---
+- name: Apache-role-playbook
+  hosts: vmachines
+  become: true
+  become_method: sudo
+  roles:
+    - role: apache-install 
