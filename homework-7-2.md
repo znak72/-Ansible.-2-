@@ -230,8 +230,8 @@ And HOSTNAME is {{ ansible_hostname }}
 
 Скрин выполнения
 
-![](./homework-7.2/image-01.jpg)
+![](https://github.com/VitaliiBo/SDVPS-homeworks/blob/main/homeworks/homework-7.2/image-01.jpg)
 
 Скрин браузера
 
-![](./homework-7.2/image-04.jpg)
+![](https://github.com/VitaliiBo/SDVPS-homeworks/blob/main/homeworks/homework-7.2/image-04.jpg)
