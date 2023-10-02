@@ -1,0 +1,212 @@
+roles/0000755000175000017500000000000014441633243013234 5ustar  bondarenkobondarenkoroles/apache-install/0000755000175000017500000000000014441434351016120 5ustar  bondarenkobondarenkoroles/apache-install/defaults/0000755000175000017500000000000014441434351017727 5ustar  bondarenkobondarenkoroles/apache-install/defaults/main.yml0000644000175000017500000000004714441434351021377 0ustar  bondarenkobondarenko---
+# defaults file for apache-install
+roles/apache-install/vars/0000755000175000017500000000000014441434351017073 5ustar  bondarenkobondarenkoroles/apache-install/vars/main.yml0000644000175000017500000000004314441434351020537 0ustar  bondarenkobondarenko---
+# vars file for apache-install
+roles/apache-install/files/0000755000175000017500000000000014441434351017222 5ustar  bondarenkobondarenkoroles/apache-install/meta/0000755000175000017500000000000014441434351017046 5ustar  bondarenkobondarenkoroles/apache-install/meta/main.yml0000644000175000017500000000314314441434351020516 0ustar  bondarenkobondarenkogalaxy_info:
+  author: your name
+  description: your role description
+  company: your company (optional)
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  # Choose a valid license ID from https://spdx.org - some suggested licenses:
+  # - BSD-3-Clause (default)
+  # - MIT
+  # - GPL-2.0-or-later
+  # - GPL-3.0-only
+  # - Apache-2.0
+  # - CC-BY-4.0
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  min_ansible_version: 2.1
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  #
+  # Provide a list of supported platforms, and for each platform a list of versions.
+  # If you don't wish to enumerate all versions for a particular platform, use 'all'.
+  # To view available platforms and versions (or releases), visit:
+  # https://galaxy.ansible.com/api/v1/platforms/
+  #
+  # platforms:
+  # - name: Fedora
+  #   versions:
+  #   - all
+  #   - 25
+  # - name: SomePlatform
+  #   versions:
+  #   - all
+  #   - 1.0
+  #   - 7
+  #   - 99.99
+
+  galaxy_tags: []
+    # List tags for your role here, one per line. A tag is a keyword that describes
+    # and categorizes the role. Users find roles by searching for tags. Be sure to
+    # remove the '[]' above, if you add tags to this list.
+    #
+    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
+    #       Maximum 20 tags per role.
+
+dependencies: []
+  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
+  # if you add dependencies to this list.
+roles/apache-install/README.md0000644000175000017500000000246014441434351017401 0ustar  bondarenkobondarenkoRole Name
+=========
+
+A brief description of the role goes here.
+
+Requirements
+------------
+
+Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+
+Role Variables
+--------------
+
+A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+
+Dependencies
+------------
+
+A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+
+Example Playbook
+----------------
+
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+
+    - hosts: servers
+      roles:
+         - { role: username.rolename, x: 42 }
+
+License
+-------
+
+BSD
+
+Author Information
+------------------
+
+An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+roles/apache-install/tests/0000755000175000017500000000000014441434351017262 5ustar  bondarenkobondarenkoroles/apache-install/tests/inventory0000644000175000017500000000001314441434351021234 0ustar  bondarenkobondarenkolocalhost
+
+roles/apache-install/tests/test.yml0000644000175000017500000000011114441434351020755 0ustar  bondarenkobondarenko---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - apache-install
+roles/apache-install/templates/0000755000175000017500000000000014441434506020120 5ustar  bondarenkobondarenkoroles/apache-install/templates/apache-index.j20000644000175000017500000000326314441662723022713 0ustar  bondarenkobondarenko{% set my_list = ansible_processor %}
+{% set unique_values = [] %}
+{% for value in my_list: %}
+    {% if value not in unique_values %}
+       {{ unique_values.append(value) }}
+    {% endif %}
+{% endfor %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ inventory_hostname }}</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><b>CPU:</b></td>
+        </tr>
+            {% for item in unique_values %}
+                {% if 'CPU' in  item  %}
+                <tr>
+                    <td> {{ item }} </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <td><b>RAM:</b></td>
+        </tr>
+        <tr>
+            <td>{{ ansible_memory_mb.real.total }} MB</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td><b>Disk Space Total:</b></td>
+        </tr>
+        <tr>
+            <!-- <td>{{ ansible_mounts[0].size_total | float / 1073741824 | round(2) }} GB</td> -->
+              <td>{{ ansible_devices.sda.size }}</td>
+        </tr>
+    </table>
+    <!-- <table>
+        <tr>
+            <td><b>Disk Space Available:</b></td>
+        </tr>
+        <tr>
+            <td>{{ ansible_mounts[0].size_available | float / 1073741824 | round(2) }} GB</td>
+        </tr>
+    </table> -->
+    <table>
+        <tr>
+            <td><b>IP Address:</b></td>
+        </tr>
+        <tr>
+            <td>{{ ansible_default_ipv4.address }}</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+roles/apache-install/tasks/0000755000175000017500000000000014441434351017245 5ustar  bondarenkobondarenkoroles/apache-install/tasks/main.yml0000644000175000017500000000205414441622001020704 0ustar  bondarenkobondarenko---
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+
+- name: Customize index.html
+  template:
+    force: true
+    src: apache-index.j2 # required. Path of a Jinja2 formatted template on the Ansible controller. This can be a relative or an absolute path. The file must be encoded with C(utf-8) but I(output_encoding) can be used to control the encoding of the output template.
+    dest: /var/www/html/index.html # required. Location to render the template to on the remote machine.
+  notify: 
+    - apache-reloaded
+
+- name: Check if port 80 is listening
+  wait_for:
+    port: 80
+    delay: 5
+    timeout: 10
+    msg: "Timeout waiting for 80 to respond"
+  register: port_check
+  ignore_errors: yes
+
+- name: Try to restart httpd if not started
+  service: 
+    name: httpd
+    state: started
+    enabled: yes
+  when: port_check.failed == true
+
+- name: Check for code 200
+  uri:
+    url: "http://{{ inventory_hostname }}"
+    method: GET
+    status_code: 200
+    return_content: no
+  register: result
+  until: result.status == 200
+  retries: 5
+  delay: 1roles/apache-install/handlers/0000755000175000017500000000000014441434351017720 5ustar  bondarenkobondarenkoroles/apache-install/handlers/main.yml0000644000175000017500000000015714441627174021401 0ustar  bondarenkobondarenko---
+# handlers file for apache-install
+- name: apache-reloaded
+  service:
+    name: apache2
+    state: reloaded
