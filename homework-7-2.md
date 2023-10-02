@@ -226,7 +226,7 @@ And HOSTNAME is {{ ansible_hostname }}
 
 Плейбук [Ссылка](https://github.com/znak72/-Ansible.-2-/blob/main/ansible%20playbook)
 
-Архив роли [Ссылка](./homework-7.2/roles.tar.gz)
+Архив роли [Ссылка](https://github.com/znak72/-Ansible.-2-/blob/main/roles.tar.gz)
 
 Скрин выполнения
 
